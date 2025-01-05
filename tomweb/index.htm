@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>AI Assistant</h1>
+        <form id="command-form">
+            <input type="text" id="command" placeholder="Enter your command here">
+            <button type="submit">Submit</button>
+        </form>
+        <div id="response"></div>
+    </div>
+    <script>
+        document.getElementById('command-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const command = document.getElementById('command').value;
+            fetch('/process', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ command: command })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('response').innerText = data.response;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Email</title>
+    <!-- Use the latest EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            console.log("Initializing EmailJS...");
+            emailjs.init("TUSjeU2tXDAsAMmRr"); // Replace with your EmailJS user ID
+        })();
+
+        function sendEmail() {
+            console.log("Preparing to send email...");
+
+            var templateParams = {
+                from_name: "gokul", // Replace with the sender's name
+                to_name: "fff", // Replace with the recipient's name
+                message: "This is a test email sent automatically when the page loads.",
+                reply_to: "sivasiva60022@gmail.com" // Replace with the sender's email
+            };
+
+            console.log("Sending email with parameters:", templateParams);
+
+            emailjs.send('service_1vf47dp', 'template_gvt5h2x', templateParams) // Replace with your EmailJS service ID and template ID
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert('Email sent successfully!');
+                }, function(error) {
+                    console.error('FAILED...', error);
+                    alert('Email failed to send. Check the console for more details.');
+                });
+        }
+
+        window.onload = sendEmail;
+    </script>
+</head>
+<body>
+    <h1>Sending Email</h1>
+    <p>The email is being sent automatically when this page loads.</p>
+</body>
+</html>
